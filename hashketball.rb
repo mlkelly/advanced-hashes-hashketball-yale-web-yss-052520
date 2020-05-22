@@ -1,3 +1,5 @@
+require "pry"
+
 # Write your code below game_hash
 def game_hash
   {
@@ -127,3 +129,81 @@ def game_hash
 end
 
 # Write code here
+
+def num_points_scored(player_name)
+  player_stats(player_name)[:points]
+end
+
+def shoe_size(player_name)
+  player_stats(player_name)[:shoe]
+end
+
+def team_colors(team)
+  game_hash.each do |home_o_away, team_info|
+    if team == team_info[:team_name]
+      return team_info[:colors] 
+    end
+  end
+end
+
+def team_names
+ [game_hash[:home][:team_name],game_hash[:away][:team_name]]
+end
+
+def player_numbers(team)
+  game_hash.each do |home_o_away, team_info|
+    if team_info[:team_name] == team
+     return helper_numbers(team_info[:players])
+    end
+  end
+end
+
+def helper_numbers(player_index) #gets player number from each player in one team
+  numbers = [] 
+
+  (0...player_index.size).each do |player_hash|
+    numbers << player_index[player_hash][:number]
+  end
+  numbers
+end
+
+
+
+def player_stats(player_name)
+  game_hash.each do |home_o_away, team_info|
+    team_info[:players].each do |player_hash|
+      if player_hash[:player_name] == player_name
+       return player_hash
+      end
+    end
+  end
+end
+
+def big_shoe_rebounds
+
+  #finding player with biggest shoe size
+  player_size = {}
+  game_hash.each do |home_o_away, team_info|
+    team_info[:players].each do |player|
+      player_size[player[:player_name]] = player[:shoe] #put all players as key, with value as size into one hash
+    end
+  end
+  biggest_foot_player = player_size.max_by {|player_name, player_shoe_size| player_shoe_size}[0] #finding max value, extracting name
+   
+  #comparing shoe size to rebound numbers
+  player_stats(biggest_foot_player)[:rebounds]
+
+
+end
+
+def most_points_scored
+end
+
+def winning_team
+end
+
+def player_with_longest_name
+end
+
+def long_name_steals_a_ton?
+end
