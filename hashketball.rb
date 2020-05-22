@@ -190,7 +190,7 @@ def big_shoe_rebounds
   end
   biggest_foot_player = player_size.max_by {|player_name, player_shoe_size| player_shoe_size}[0] #finding max value, extracting name
    
-  #comparing shoe size to rebound numbers
+  #looking up player with the biggest foot rebound total
   player_stats(biggest_foot_player)[:rebounds]
 
 
